@@ -1,39 +1,43 @@
 var timeEl = document.querySelector(".timer-text");
 var secondsLeft = 60;
-var questionEl = document.getElementById("questions");
-// var answerEl = document.getElementById("answers");
-var buttonEl1 = document.getElementById("button1");
-var buttonEl2 = document.getElementById("button2");
-var buttonEl3 = document.getElementById("button3");
-var buttonEl4 = document.getElementById("button4");
+var questionEl = document.getElementById("questions-text");
+var button = document.querySelector("button");
+
+
 var losePoints = 0;
 
 var startBtn = document.querySelector(".start-button");
 var questions = [
     {
         question: "What is Javascript?",
-        answers1: "A scripting language.",
-        answers2: "A social media site.",
-        answers3: "An HTML tag.",
-        answers4: "A CSS design feature.",
-        correctAnswer: "A scripting language.",
+       answers: [
+        "A scripting language.",
+        "A social media site.",
+        "A Google font.",
+        "A music application.",
+       ],
+       correctAnswer: "A scripting language.",
+        
     },
     {
-        question: "What is HTML?",
-        answers1: "a1",
-        answers2: "a2",
-        answers3: "a3",
-        answers4: "a4",
-        correctAnswer: "a1",
+        question: "Where in the HTML do we link Javascript?",
+        answers: [ "On the first line",
+        "At the bottom",
+        "We do not link it on HTML",
+        "Before the CSS link.",
+    ],
+    correctAnswer: "At the bottom",
     },
     {
-        question: "what is Javascript?",
-        answers1: "a1",
-        answers2: "a2",
-        answers3: "a3",
-        answers4: "a4",
-        correctAnswer: "a1",
-    },
+        question: "Where do we see console.log appear?",
+       answers: [ "On the CSS.",
+        "On the HTML sheet.",
+        "In the console of the website.",
+        "Nowhere",
+    ],
+    
+    correctAnswer: "In the console of the website.",
+},
 ]
 console.log(questions[0].answers);
 
@@ -43,44 +47,38 @@ startBtn.addEventListener("click", function () {
         timeEl.textContent = secondsLeft + " seconds remaining ";
         if (secondsLeft === 0) {
             clearInterval(timer);
+            alert("Game Over!!");
         }
     }, 1000);
     startQuiz()
 })
-
-// buttonEl1.textContent = questions[0].answers1;
+let questionIndex = 0;
 
 function startQuiz() {
-    console.log(questions[0].answers1);
-   
-
-    // console.log(answers);
-    for (var i = 0; i < questions.length; i++){
-    if (questionEl.textContent = questions[0].question);
-    buttonEl1.textContent = questions[0].answers1;
-    buttonEl2.textContent = questions[0].answers2;
-    buttonEl3.textContent = questions[0].answers3;
-    buttonEl4.textContent = questions[0].answers4;
-    // answerEl.textContent = questions[0].answers;
-       // if (answers2 || answers3 || answers4){
-        // losePoints = 
-    if (questionEl.textContent = questions[1].question);
-            buttonEl1.textContent = questions[0].answers1;
-            buttonEl2.textContent = questions[0].answers2;
-            buttonEl3.textContent = questions[0].answers3;
-            buttonEl4.textContent = questions[0].answers4;   
-
-    }    
+    renderQuestion()
+  }
+        
+function renderQuestion(){
+    var currentQuestion = questions[questionIndex];
+    questionEl.textContent = currentQuestion.question;
+    answers.innerHTML = "";
+    for (let index=0;index<currentQuestion.answers.length; index++){
+        var button = document.createElement("button");
+        button.textContent = currentQuestion.answers[index];
+        button.addEventListener("click", function (){ userAnswer (currentQuestion.answers[index]) });
+        answers.appendChild(button); 
+    }
+  
 }
-function renderquestion(){
-
+function userAnswer(correctAnswer){
+    var currentAnswer = questions[questionIndex].correctAnswer;
+    if (correctAnswer===currentAnswer){
+    console.log("correct");
+    }else {
+    console.log("incorrect");
+    questionIndex++;
+    renderQuestion();
+    secondsLeft -=15;
+    }
 }
-
-    // loop through the answrrs array and display those answers 
-    //asnwers have to be input elements or  buttons so we can record them. after we get those elements we want some way to check for the right answer,and display right or wrong. display score at end.
-    //
-
-    // loop over the answers. we have buttons created in the html already. need to write if else statement : if the answer1 equals correct answer then add 5 points, else subtract 5 seconds time. Next : move to next question.
-    // need to find way to keep score and display at end. create element starting at 0 and add 5 if click correct answer 
-
 
