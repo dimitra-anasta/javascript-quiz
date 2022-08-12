@@ -1,13 +1,11 @@
-.start-button button {
-    color:aqua;
-}
-
-#h1 {
-    color:blue;
-}
-
-
 
 .card-body {
-    color:rgb(112, 111, 111);
+    color:rgb(72, 69, 69);
+    font-family:Arial, Helvetica, sans-serif;
 }
+
+.start-button {
+    color:rgb(55, 153, 233);
+    font-family:Arial, Helvetica, sans-serif;
+}
+

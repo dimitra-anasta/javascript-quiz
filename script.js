@@ -3,9 +3,10 @@ var secondsLeft = 60;
 var questionEl = document.getElementById("questions-text");
 var button = document.querySelector("button");
 var score = 0;
+//var question = document.getElementById("question");
 
 var startBtn = document.querySelector(".start-button");
-var questions = [
+ var questions = [
     {
         question: "What is Javascript?",
        answers: [
