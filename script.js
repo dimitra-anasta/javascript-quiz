@@ -2,9 +2,7 @@ var timeEl = document.querySelector(".timer-text");
 var secondsLeft = 60;
 var questionEl = document.getElementById("questions-text");
 var button = document.querySelector("button");
-
-
-var losePoints = 0;
+var score = 0;
 
 var startBtn = document.querySelector(".start-button");
 var questions = [
@@ -22,11 +20,11 @@ var questions = [
     {
         question: "Where in the HTML do we link Javascript?",
         answers: [ "On the first line",
-        "At the bottom",
+        "At the bottom, under the body",
         "We do not link it on HTML",
         "Before the CSS link.",
     ],
-    correctAnswer: "At the bottom",
+    correctAnswer: "At the bottom, under the body",
     },
     {
         question: "Where do we see console.log appear?",
@@ -38,6 +36,16 @@ var questions = [
     
     correctAnswer: "In the console of the website.",
 },
+{
+    question: "Which tag do we use to tag Javascript on HTML?",
+   answers: [ "<j></j>",
+    "<javascript></javascript>",
+    "<java></java>",
+    "<script></script>",
+],
+
+correctAnswer: "<script></script>",
+},
 ]
 console.log(questions[0].answers);
 
@@ -47,12 +55,12 @@ startBtn.addEventListener("click", function () {
         timeEl.textContent = secondsLeft + " seconds remaining ";
         if (secondsLeft === 0) {
             clearInterval(timer);
-            alert("Game Over!!");
+            alert("Time's Up! Game Over!!");
         }
     }, 1000);
     startQuiz()
 })
-let questionIndex = 0;
+var questionIndex = 0;
 
 function startQuiz() {
     renderQuestion()
@@ -72,13 +80,22 @@ function renderQuestion(){
 }
 function userAnswer(correctAnswer){
     var currentAnswer = questions[questionIndex].correctAnswer;
+   console.log(currentAnswer);
+   console.log(correctAnswer);
     if (correctAnswer===currentAnswer){
-    console.log("correct");
-    }else {
-    console.log("incorrect");
+        console.log("correct");
+        score++;
+    } else {
+        console.log("incorrect");
+        secondsLeft-=15;
+    }
     questionIndex++;
+    if (questionIndex> questions.length){
+// function for ending game and ending score display
+    }
+    else{
     renderQuestion();
-    secondsLeft -=15;
     }
 }
+
 
